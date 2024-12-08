@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layouts/main_layout}">
+
+<th:block layout:fragment="content">
+	<div class="row my-5" id="global-content">
+		<div class="col-10 offset-1">
+			<div class="row text-center">
+				<div class="col">
+					<h2 class="fs-3 fw-bold">게시글 수정하기</h2>
+				</div>
+			</div>
+		
+			<form name="updateForm" action="/update" id="updateForm" class="row g-3 border-primary" method="post">
+			<input type="hidden" name="boardNo" id ="boardNo" th:value="${board.boardNo}">
+				<div class="col-4 offset-md-2">
+					<label for="memberId" class="form-label">글쓴이</label>
+					<input type="text" class="form-control" name="memberId" id="memberId" th:value="${board.memberId}" readonly>
+				</div>
+				<div class="col-4 ">
+					<label for="boardPass" class="form-label">비밀번호</label>
+					<input type="password" class="form-control" name="boardPass" id="boardPass">
+				</div>
+				<div class="col-8 offset-md-2">
+					<label for="boardTitle" class="form-label">제 목</label>
+					<input type="text" class="form-control" name="boardTitle" id="boardTitle" th:value="${board.boardTitle}">
+				</div>
+				<div class="col-8 offset-md-2">
+					<label for="boardContent" class="form-label">내 용</label>
+					<textarea class="form-control" name="boardContent" id="boardContent" rows="10">[[${board.boardContent}]]</textarea>
+				</div>
+				<div class="col-8 offset-md-2 text-center mt-5">
+					<input type="submit" value="수정하기" class="btn btn-primary"/>
+					&nbsp;&nbsp;
+					<input type="button" value="목록보기" onclick="location.href='boardList'" class="btn btn-primary"/>
+				</div>
+			</form>
+		</div>
+	</div>
+</th:block>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.springbootproject.bbs.mapper.BoardMapper">
+
+<!-- 게시글 리스트 조회 -->
+<select id = "boardList" resultType = "Board">
+	SELECT b.board_no, b.board_title, b.board_content, b.board_pass, b.board_reg_date, b.board_view, b.member_id, b.board_file1, b.board_like, b.board_dislike, c.category_code, c.category_name 
+	FROM board b JOIN category c
+	ON b.category_code = c.category_code
+	WHERE b.category_code = #{categoryCode}
+	ORDER BY b.board_no DESC
+</select>
+
+<!-- 게시글 상세보기 -->
+<select id = "getBoard" resultType = "Board">
+	SELECT b.board_no, b.board_title, b.board_content, b.board_pass, b.board_reg_date, b.board_view, b.member_id, b.board_file1, b.board_like, b.board_dislike, c.category_code, c.category_name 
+	FROM board b JOIN category c
+	ON b.category_code = c.category_code
+	WHERE b.category_code = #{categoryCode}
+	AND b.board_no = #{boardNo}
+	ORDER BY b.board_no DESC
+</select>
+
+<!-- 게시글 작성 -->
+<insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
+	INSERT INTO board(board_title, board_content, board_pass, board_reg_date, board_view, category_code, member_id, board_file1, board_like, board_dislike)
+	VALUES(#{boardTitle}, #{boardContent}, #{boardPass}, SYSDATE(), #{boardView}, #{categoryCode}, #{memberId}, #{boardFile1}, #{boardLike}, #{boardDislike})
+</insert>
+
+<!-- 게시글 비밀번호 확인 -->
+<select id="isPassCheck">
+	SELECT board_pass
+	FROM board
+	WHERE board_no = #{boardNo}
+</select>
+
+<!-- 게시글 수정 -->
+<update id="updateBoard" parameterType="Board">
+	UPDATE board
+	SET board_title = #{boardTitle}, board_content = #{boardContent}, board_reg_date = SYSDATE()
+	WHERE board_no = #{boardNo}
+</update>
+
+<!-- 게시글 삭제 -->
+<delete id="deleteBoard">
+	DELETE FROM board
+	WHERE board_no = #{boardNo}
+</delete>
+
+</mapper>

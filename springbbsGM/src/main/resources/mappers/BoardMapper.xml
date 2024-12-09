@@ -4,12 +4,43 @@
 <mapper namespace = "com.springbootproject.bbs.mapper.BoardMapper">
 
 <!-- 게시글 리스트 조회 -->
-<select id = "boardList" resultType = "Board">
+<select id = "boardList" parameterType="map" resultType = "Board">
 	SELECT b.board_no, b.board_title, b.board_content, b.board_pass, b.board_reg_date, b.board_view, b.member_id, b.board_file1, b.board_like, b.board_dislike, c.category_code, c.category_name 
 	FROM board b JOIN category c
 	ON b.category_code = c.category_code
-	WHERE b.category_code = #{categoryCode}
+	<where>
+	b.category_code = #{categoryCode} 
+		<if test="type == 'title'">
+			AND board_title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="type == 'writer'">
+			AND member_id LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="type == 'content'">
+			AND board_content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+	</where>	
 	ORDER BY b.board_no DESC
+	LIMIT #{startRow}, #{num}
+</select>
+
+<!-- 전체 게시글 수 -->
+<select id="getBoardCount">
+	SELECT COUNT(board_no)
+	FROM board b JOIN category c
+	ON b.category_code = c.category_code
+	<where>
+	b.category_code = #{categoryCode} 
+		<if test="type == 'title'">
+			AND board_title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="type == 'writer'">
+			AND member_id LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="type == 'content'">
+			AND board_content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+	</where>
 </select>
 
 <!-- 게시글 상세보기 -->
@@ -21,6 +52,16 @@
 	AND b.board_no = #{boardNo}
 	ORDER BY b.board_no DESC
 </select>
+
+<!-- 게시글 조회수 -->
+<update id="incrementReadCount">
+	UPDATE board b
+			JOIN category c
+	ON b.category_code = c.category_code
+	SET b.board_view = b.board_view + 1
+	WHERE b.category_code = #{categoryCode}
+	AND b.board_no = #{boardNo};
+</update>
 
 <!-- 게시글 작성 -->
 <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">

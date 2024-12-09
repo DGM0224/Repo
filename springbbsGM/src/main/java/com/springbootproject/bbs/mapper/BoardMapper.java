@@ -11,10 +11,17 @@ import com.springbootproject.bbs.domain.Board;
 public interface BoardMapper {
 	
 	// 게시판 리스트 불러오기
-	public List<Board> boardList(int categoryCode);
+	public List<Board> boardList(@Param("categoryCode") int categoryCode, @Param("startRow") int startRow, @Param("num") int num,
+								@Param("type") String type, @Param("keyword") String keyword);
+	
+	// 전체 게시글 수 불러오기
+	public int getBoardCount(@Param("categoryCode") int categoryCode, @Param("type") String type, @Param("keyword") String keyword);
 
 	// 게시판 상세보기
 	public Board getBoard(@Param("categoryCode") int categoryCode, @Param("boardNo") int boardNo);
+	
+	// 게시글 조회수
+	public void incrementReadCount(@Param("categoryCode") int categoryCode, @Param("boardNo") int boardNo);
 	
 	// 게시판 작성 요청
 	public void insertBoard(Board board);

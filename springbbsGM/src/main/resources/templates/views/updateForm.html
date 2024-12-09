@@ -13,7 +13,14 @@ layout:decorate="~{layouts/main_layout}">
 			</div>
 		
 			<form name="updateForm" action="/update" id="updateForm" class="row g-3 border-primary" method="post">
+			
 			<input type="hidden" name="boardNo" id ="boardNo" th:value="${board.boardNo}">
+			<input type="hidden" name="pageNum" th:value="${pageNum}">
+			<th:block th:if=${searchOption}>
+				<input type="hidden" name="type" th:value="${ type }" />
+				<input type="hidden" name="keyword" th:value="${ keyword }" />
+			</th:block>
+			
 				<div class="col-4 offset-md-2">
 					<label for="memberId" class="form-label">글쓴이</label>
 					<input type="text" class="form-control" name="memberId" id="memberId" th:value="${board.memberId}" readonly>
@@ -33,7 +40,14 @@ layout:decorate="~{layouts/main_layout}">
 				<div class="col-8 offset-md-2 text-center mt-5">
 					<input type="submit" value="수정하기" class="btn btn-primary"/>
 					&nbsp;&nbsp;
-					<input type="button" value="목록보기" onclick="location.href='boardList'" class="btn btn-primary"/>
+					<th:block th:unless="${searchOption}">
+						&nbsp;&nbsp;
+						<input class="btn btn-primary" type="button" value="목록보기" th:onclick="@{|location.href='boardList?pageNum=${pageNum}'|}"/>
+					</th:block>					
+					<th:block th:if="${searchOption}">
+						&nbsp;&nbsp;
+						<input class="btn btn-primary" type="button" value="목록보기" th:onclick="@{|location.href='boardList?pageNum=${pageNum}&type=${type}&keyword=${keyword}'|}"/>
+					</th:block>
 				</div>
 			</form>
 		</div>

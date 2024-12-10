@@ -1,0 +1,28 @@
+package com.springbootproject.bbs.domain;
+
+import java.sql.Timestamp;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Member {
+	
+	private String id;
+	private String name;
+	private String pass;
+	private String email;
+	private String mobile;
+	private String zipcode;
+	private String address1;
+	private String address2;
+	private Boolean emailGet;
+	private Timestamp regDate;
+	private String nickname;
+	
+}

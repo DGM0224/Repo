@@ -13,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Board {
 	
+	// DTO
+	
 	// DB 테이블 - 게시판
 	private int boardNo;
 	private String boardTitle;

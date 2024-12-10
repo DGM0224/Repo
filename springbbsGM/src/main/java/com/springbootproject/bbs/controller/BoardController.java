@@ -23,15 +23,17 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
 
 	// 게시판 리스트 불러오기
 	@GetMapping({"/", "/boardList"})
-	public String boardList(Model model, 
+	public String boardList(Model model,
+			@RequestParam(value = "categoryCode", required = false, defaultValue = "1") int categoryCode,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
 			@RequestParam(value="type", required = false, defaultValue = "null") String type,
 			@RequestParam(value="keyword", required = false, defaultValue = "null") String keyword) {
 		
-		Map<String, Object> modelMap = boardService.boardList(1, pageNum, type, keyword);
+		Map<String, Object> modelMap = boardService.boardList(categoryCode, pageNum, type, keyword);
 		
 		model.addAllAttributes(modelMap);
 		
@@ -42,13 +44,14 @@ public class BoardController {
 	@GetMapping("/boardDetail")
 	public String getBoard(Model model, 
 			@RequestParam("boardNo") int boardNo, 
+			@RequestParam(value = "categoryCode", required = false, defaultValue = "1") int categoryCode,
 			@RequestParam(value="pageNum", required = false, defaultValue="1") int pageNum,
 			@RequestParam(value="type", required = false, defaultValue = "null") String type,
 			@RequestParam(value="keyword", required = false, defaultValue = "null") String keyword) {
 		
 		boolean searchOption = (type.equals("null") || keyword.equals("null")) ? false : true;
 		
-		model.addAttribute("board", boardService.getBoard(1, boardNo, true));
+		model.addAttribute("board", boardService.getBoard(categoryCode, boardNo, true));
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("searchOption", searchOption);
 		if(searchOption) {
@@ -111,6 +114,7 @@ public class BoardController {
 	public String updateBoard(Board board, 
 			HttpServletResponse response, PrintWriter out,
 			RedirectAttributes reAttrs,
+			@RequestParam(value = "categoryCode", required = false, defaultValue = "1") int categoryCode,
 			@RequestParam(value="pageNum", required = false, defaultValue="1") int pageNum,
 			@RequestParam(value="type", required = false, defaultValue = "null") String type,
 			@RequestParam(value="keyword", required = false, defaultValue = "null") String keyword) {
@@ -126,7 +130,7 @@ public class BoardController {
 		return null;
 		}
 	
-		boardService.updateBoard(1, board);
+		boardService.updateBoard(categoryCode, board);
 		
 		boolean searchOption = (type.equals("null") || keyword.equals("null")) ? false : true;
 		

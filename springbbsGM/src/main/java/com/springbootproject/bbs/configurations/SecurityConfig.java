@@ -1,6 +1,9 @@
 package com.springbootproject.bbs.configurations;
 
 import org.springframework.context.annotation.Bean;
+
+
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,8 +17,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 	
 	@Bean
+	public PasswordEncoder passwordEncoder() {
+	return new BCryptPasswordEncoder();
+	}
+	
 	// 스프링 시큐리티를 적용시 모든 요청 URL에서 인증을 시도해 로그인 창이 나타남
-	// 별도로 인증하지 않도록 설정하면 사이트의 모든 페이지에 접근 가능					
+	// 별도로 인증하지 않도록 설정하면 사이트의 모든 페이지에 접근 가능		
+	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
 			// 모든 경우에 대해 접근 허용하게 설정

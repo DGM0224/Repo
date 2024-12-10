@@ -60,7 +60,7 @@ INSERT INTO category
 VALUES (1, "축구");
 
 INSERT INTO member
-VALUES ('dgm0224', '도건민', '1234', 'dogun0224@naver.com', '01012345678', '12345', '경기도 군포시', '산본', 1, SYSDATE(), 'Thomas');
+VALUES ('dgm0224', '도건민', '$2a$10$aWYm2BGI/0iMuemBeF4Y8.7WZeVKAoudv/VzgQx697lYlZgQxr/pe', 'dogun0224@naver.com', '01012345678', '12345', '경기도 군포시', '산본', 1, SYSDATE(), 'Thomas');
 
 INSERT INTO board(board_title, board_content, board_pass, board_reg_date, board_view, category_code, member_id, board_file1, board_like, board_dislike)
 VALUES ('내가 검붉은 피라고?', '그렇다. 사실 난 서울에서 태어났지. 태생이 수호신이야 난..', '1234', SYSDATE(), '10', 1, 'dgm0224', null, 90, 1);
@@ -68,7 +68,7 @@ INSERT INTO board(board_title, board_content, board_pass, board_reg_date, board_
 VALUES ('일류첸코, 강상우 이적썰?', '에바지;; 서울을 위해 뛰어야지;;', '1234', SYSDATE(), '16', 1, 'dgm0224', null, 90, 12);
 
 SELECT *
-FROM board;
+FROM member;
 
 INSERT INTO reply(board_no, reply_content, member_id, reply_reg_date, reply_like, reply_dislike)
 VALUES (135, '당신은 서울라이팅 당한거야...', 'dgm0224', SYSDATE(), 20, 11);

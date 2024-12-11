@@ -18,7 +18,7 @@ public class SecurityConfig {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 	
 	// 스프링 시큐리티를 적용시 모든 요청 URL에서 인증을 시도해 로그인 창이 나타남

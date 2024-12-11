@@ -70,8 +70,9 @@ public class BoardController {
 
 	// 게시글 작성 요청 
 	@PostMapping("/addBoard")
-	public String addBoard(Board board) {
-		boardService.addBoard(1, board);
+	public String addBoard(Board board, 
+			@RequestParam(value = "categoryCode", required = false, defaultValue = "1") int categoryCode) {
+		boardService.addBoard(categoryCode, board);
 		return "redirect:boardList";
 	}
 	

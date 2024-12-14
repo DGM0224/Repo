@@ -15,7 +15,7 @@ layout:decorate="~{layouts/main_layout}">
 		<form name="writeForm" action="addBoard" id="writeForm" class="row g-3 border-primary" method="post">
 			<div class="col-4 offset-md-2">
 				<label for="memberId" class="form-label">글쓴이</label>
-				<input type="text" class="form-control" name="memberId" id="memberId" placeholder="작성자를 입력해 주세요">
+				<input type="text" class="form-control" name="memberId" id="memberId" th:value = "${session.member.id}" readonly>
 			</div>
 			<div class="col-4 ">
 				<label for="boardPass" class="form-label">비밀번호</label>

@@ -46,6 +46,32 @@ public class MemberService {
 		return memberMapper.getMember(id);	
 	}
 
+	// id 중복 체크
+	public boolean overlapIdCheck(String id) {
+		Member member = memberMapper.getMember(id);
+		log.info("overlapIdCheck - member : " + member);
+		if(member == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	// nickname 중복 체크
+	public boolean overlapNicknameCheck(String nickname) {
+		Member member = memberMapper.getMember2(nickname);
+		log.info("overlapNicknameCheck - member : " + member);
+		if(member == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	// 회원 가입
+	public void addMember(Member member) {
+		member.setPass(passwordEncoder.encode(member.getPass()));
+		log.info(member.getPass());
+		memberMapper.addMember(member);
+	}
 	
 	
 	

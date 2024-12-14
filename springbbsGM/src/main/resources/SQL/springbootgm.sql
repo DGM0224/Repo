@@ -21,7 +21,7 @@ address1  VARCHAR(80) NOT NULL,
 address2  VARCHAR(60) NOT NULL,
 email_get BOOLEAN NOT NULL,
 reg_date  TIMESTAMP NOT NULL,
-nickname VARCHAR(20) NOT NULL
+nickname VARCHAR(20) NOT NULL UNIQUE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 # 게시판
@@ -55,7 +55,6 @@ CREATE TABLE IF NOT EXISTS reply(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
 INSERT INTO category
 VALUES (1, "축구");
 
@@ -68,9 +67,9 @@ INSERT INTO board(board_title, board_content, board_pass, board_reg_date, board_
 VALUES ('일류첸코, 강상우 이적썰?', '에바지;; 서울을 위해 뛰어야지;;', '1234', SYSDATE(), '16', 1, 'dgm0224', null, 90, 12);
 
 SELECT *
-FROM member;
+FROM board;
 
 INSERT INTO reply(board_no, reply_content, member_id, reply_reg_date, reply_like, reply_dislike)
-VALUES (135, '당신은 서울라이팅 당한거야...', 'dgm0224', SYSDATE(), 20, 11);
+VALUES (69, '당신은 서울라이팅 당한거야...', 'dgm0224', SYSDATE(), 20, 11);
 INSERT INTO reply(board_no, reply_content, member_id, reply_reg_date, reply_like, reply_dislike)
-VALUES (136, '응 절대 안가~', 'dgm0224', SYSDATE(), 12, 2);
+VALUES (70, '응 절대 안가~', 'dgm0224', SYSDATE(), 12, 2);

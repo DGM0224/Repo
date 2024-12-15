@@ -183,7 +183,7 @@ $(function() {
 			alert("기존 비밀번호를 확인해야 비밀번호를 수정할 수 있습니다.\n"
 			+ "기존 비밀번호를 입력하고 비밀번호 확인 버튼을 클릭해 주세요");
 			return false;
-		}
+		}	
 		return joinFormCheck();
 	});
 

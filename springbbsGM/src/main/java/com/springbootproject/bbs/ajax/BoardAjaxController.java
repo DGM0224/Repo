@@ -50,6 +50,7 @@ public class BoardAjaxController {
 		return boardService.replyList(reply.getBoardNo());
 	}
 	
+	// 댓글 삭제
 	@DeleteMapping("/replyDelete.ajax")
 	public List<Reply> deleteReply(@RequestParam("replyNo") int replyNo, @RequestParam("boardNo") int boardNo) {
 		boardService.deleteReply(replyNo);

@@ -73,6 +73,24 @@ public class MemberService {
 		memberMapper.addMember(member);
 	}
 	
+	// 회원 비밀번호 확인
+	public boolean memberPassCheck(String id, String pass) {
+		String dbPass = memberMapper.memberPassCheck(id);
+		boolean result = false;
+
+		if(passwordEncoder.matches(pass, dbPass)) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	// 회원 수정
+	public void updateMember(Member member) {	
+		member.setPass(passwordEncoder.encode(member.getPass()));
+		log.info(member.getPass());
+		memberMapper.updateMember(member);
+	}
 	
 	
 }

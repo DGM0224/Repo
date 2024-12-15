@@ -17,6 +17,7 @@
 	WHERE nickname = #{nickname}
 </select>
 
+<!-- 회원 가입 -->
 <insert id="addMember" parameterType="Member">
 	INSERT INTO member
 	VALUES(#{id}, #{name}, #{pass}, #{email},
@@ -24,6 +25,20 @@
 	#{emailGet}, SYSDATE(), #{nickname})
 </insert>
 
+<!-- 회원 비밀번호 확인 -->
+<select id="memberPassCheck" resultType="String">
+	SELECT pass
+	FROM member
+	WHERE id = #{id}
+</select>
 
+<!-- 회원 수정 -->
+<update id="updateMember" parameterType="Member">
+	UPDATE member
+	SET pass = #{pass}, email = #{email}, mobile = #{mobile},
+	zipcode = #{zipcode}, address1 = #{address1}, address2 = #{address2},
+	email_get = #{emailGet}, reg_date = SYSDATE()
+	WHERE id=#{id}
+</update>
 
 </mapper>

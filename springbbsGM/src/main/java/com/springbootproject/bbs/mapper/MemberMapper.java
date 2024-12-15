@@ -15,4 +15,10 @@ public interface MemberMapper {
 
 	// 회원 가입
 	public void addMember(Member member);
+	
+	// 비밀번호 확인
+	public String memberPassCheck(String id);
+	
+	// 회원 수정
+	public void updateMember(Member member);
 }

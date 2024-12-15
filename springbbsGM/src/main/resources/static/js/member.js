@@ -142,7 +142,52 @@ $(function() {
 	$("#joinForm").on("submit", function() {
 		return joinFormCheck();
 	});
+	
+	// 회원 수정 - 기존 비밀번호 확인
+	$("#btnPassCheck").click(function() {
+		let oldId = $("#id").val();
+		let oldPass = $("#oldPass").val();
+		if($.trim(oldPass).length == 0) {
+			alert("기존 비밀번호가 입력되지 않았습니다.\n기존 비밀번호를 입력해주세요");
+			return false;
+		}
+		
+		let data = "id=" + oldId + "&pass="+oldPass;
+		console.log("data : " + data);
+		
+		$.ajax({
+			"url": "passCheck.ajax",
+			"type": "get",
+			"data": data,
+			"dataType": "json",
+			"success": function(resData) {
+				if(resData.result) {
+					alert("비밀번호가 확인되었습니다.\n비밀번호를 수정해주세요");
+					$("#btnPassCheck").prop("disabled", true);
+					$("#oldPass").prop("readonly", true);
+					$("#pass1").focus();
+				} else {
+					alert("비밀번호가 틀립니다.\n비밀번호를 다시 확인해주세요");
+					$("#oldPass").val("").focus();
+				}
+			},
+			"error": function(xhr, status) {
+				console.log("error : " + status);
+			}
+		});
+	});
+	
+	// 회원 수정 - 전송 시 유효성 검사 (비밀번호 확인)
+	$("#memberUpdateForm").on("submit", function() {
+		if(! $("#btnPassCheck").prop("disabled")) {
+			alert("기존 비밀번호를 확인해야 비밀번호를 수정할 수 있습니다.\n"
+			+ "기존 비밀번호를 입력하고 비밀번호 확인 버튼을 클릭해 주세요");
+			return false;
+		}
+		return joinFormCheck();
+	});
 
+	
 	
 		
 });
@@ -184,6 +229,7 @@ function joinFormCheck() {
 	let isIdCheck = $("#isIdCheck").val();
 	let isNicknameCheck = $("#isNicknameCheck").val();
 	
+	
 	if(name.length == 0) {
 		alert("이름이 입력되지 않았습니다.\n이름을 입력해주세요");
 		return false;
@@ -203,6 +249,10 @@ function joinFormCheck() {
 	if(isNicknameCheck === 'false') {
 		alert("닉네임 중복 체크를 하지 않았습니다.\n닉네임 중복 체크를 해주세요");
 		return false;
+	}
+	if (pass1.length == 0 && pass2.length == 0) {
+	    alert("비밀번호와 비밀번호 확인이 모두 입력되지 않았습니다.\n비밀번호를 입력해주세요.");
+	    return false;
 	}
 	if(pass1.length == 0) {
 		alert("비밀번호가 입력되지 않았습니다.\n비밀번호를 입력해주세요");

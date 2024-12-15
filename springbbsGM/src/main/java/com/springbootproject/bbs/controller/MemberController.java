@@ -107,13 +107,42 @@ public class MemberController {
 							@RequestParam(value="emailGet", required=false, defaultValue="false")boolean emailGet) {
 		member.setPass(pass1);
 		member.setEmail(emailId + "@" + emailDomain);
-		member.setMobile(mobile1 + mobile2 + mobile3);
+		member.setMobile(mobile1 + "-" + mobile2 + "-"  + mobile3);
 		member.setEmailGet(Boolean.valueOf(emailGet));
 	
 		memberService.addMember(member);
 		log.info("joinResult : " + member.getName());
 	
 		return "redirect:loginForm";
+	}
+	
+	// 회원 수정 폼
+	@GetMapping("/memberUpdateForm")
+	public String updateForm(Model model, HttpSession session) {
+		return "member/memberUpdateForm";
+	}
+	
+	// 회원 수정 처리
+	@PostMapping("/memberUpdateResult")
+	public String memberUpdateInfo(Model model, Member member,
+									@RequestParam("pass1") String pass1,
+									@RequestParam("emailId") String emailId,
+									@RequestParam("emailDomain") String emailDomain,
+									@RequestParam("mobile1") String mobile1,
+									@RequestParam("mobile2") String mobile2,
+									@RequestParam("mobile3") String mobile3,
+									@RequestParam(value="emailGet", required=false, defaultValue="false")boolean emailGet) {
+		member.setPass(pass1);
+		member.setEmail(emailId + "@" + emailDomain);
+		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
+		member.setEmailGet(Boolean.valueOf(emailGet));
+	
+		memberService.updateMember(member);
+		log.info("memberUpdateResult : " + member.getId());
+	
+		model.addAttribute("member", member);
+	
+		return "redirect:boardList";
 	}
 
 }

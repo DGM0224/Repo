@@ -86,12 +86,12 @@ layout:decorate="~{layouts/main_layout}">
 			<div class="row my-5">
 				<div class="col border p-3">
 					<div id="recommend" class="text-end">
-						<span id="commend" class="btnCommend text-primary" style="cursor: pointer;">
+						<span id="boardLike" class="btnCommend text-primary" style="cursor: pointer;">
 							<img src="images/recommend.png" alt="좋아요" />&nbsp;좋아요
 							<span class="recommend" th:text="|(${board.boardLike})|"></span>
 						</span> |
-						<span id="thank" class="btnCommend text-primary" style="cursor: pointer;">
-							<img src="images/smile.png" alt="싫어요"/>&nbsp;싫어요
+						<span id="boardDislike" class="btnCommend text-primary" style="cursor: pointer;">
+							<img src="images/bad.png" alt="싫어요"/>&nbsp;싫어요
 							<span class="recommend" th:text="|(${board.boardDislike})|"></span>
 						</span> |
 						<span id="replyWrite" class="text-primary" style="cursor: pointer;">

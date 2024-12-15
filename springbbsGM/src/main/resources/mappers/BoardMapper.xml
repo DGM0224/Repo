@@ -97,4 +97,24 @@
 	ORDER BY reply_no DESC
 </select>
 
+<!-- 좋아요/싫어요 업데이트 -->
+<update id="updateRecommend">
+	UPDATE board
+	SET
+	<if test = "recommend == 'boardLike'">
+		board_like = board_like + 1
+	</if>
+	<if test = "recommend == 'boardDislike'">
+		board_dislike = board_dislike + 1
+	</if>
+	WHERE board_no = #{boardNo}
+</update>
+
+<!-- 좋아요/싫어요 수 조회 -->
+<select id="getRecommend" resultType="Board">
+	SELECT board_like, board_dislike
+	FROM board
+	WHERE board_no = #{boardNo}
+</select>
+
 </mapper>

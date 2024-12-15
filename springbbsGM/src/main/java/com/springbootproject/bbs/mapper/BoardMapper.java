@@ -38,4 +38,10 @@ public interface BoardMapper {
 	
 	// 댓글 불러오기
 	public List<Reply> replyList(int boardNo);
+	
+	// 좋아요/싫어요 업데이트
+	public void updateRecommend(@Param("boardNo") int noboardNo, @Param("recommend") String recommend);
+			
+	// 게시글 번호에 해당하는 좋아요/싫어요 수를 읽어오기
+	public Board getRecommend(int boardNo);
 }

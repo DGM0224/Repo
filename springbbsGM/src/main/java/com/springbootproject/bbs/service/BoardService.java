@@ -117,4 +117,14 @@ public class BoardService {
 		return boardMapper.replyList(boardNo);
 	}
 	
+	// 좋아요/싫어요 업데이트 및 갱신
+	public Map<String, Integer> recommend(int boardNo, String recommend) {
+		boardMapper.updateRecommend(boardNo, recommend);
+		Board board = boardMapper.getRecommend(boardNo);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("boardLike", board.getBoardLike());
+		map.put("boardDislike", board.getBoardDislike());
+		return map;
+	}
+	
 }

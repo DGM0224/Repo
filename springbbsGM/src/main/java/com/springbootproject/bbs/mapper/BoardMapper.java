@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.springbootproject.bbs.domain.Board;
+import com.springbootproject.bbs.domain.Reply;
 
 @Mapper
 public interface BoardMapper {
@@ -34,4 +35,7 @@ public interface BoardMapper {
 	
 	// 게시글 삭제 요청
 	public void deleteBoard(int boardNo);
+	
+	// 댓글 불러오기
+	public List<Reply> replyList(int boardNo);
 }

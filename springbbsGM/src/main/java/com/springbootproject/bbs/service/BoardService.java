@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springbootproject.bbs.domain.Board;
+import com.springbootproject.bbs.domain.Reply;
 import com.springbootproject.bbs.mapper.BoardMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -109,6 +110,11 @@ public class BoardService {
 	public void deleteBoard(int boardNo) {
 		log.info("BoardService: deleteBoard(int boardNo)");
 		boardMapper.deleteBoard(boardNo);
+	}
+	
+	// 댓글 불러오기
+	public List<Reply> replyList(int boardNo) {
+		return boardMapper.replyList(boardNo);
 	}
 	
 }

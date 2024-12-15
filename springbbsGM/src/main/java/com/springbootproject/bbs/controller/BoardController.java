@@ -1,6 +1,7 @@
 package com.springbootproject.bbs.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springbootproject.bbs.domain.Board;
+import com.springbootproject.bbs.domain.Reply;
 import com.springbootproject.bbs.service.BoardService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,6 +60,8 @@ public class BoardController {
 			model.addAttribute("type", type);
 			model.addAttribute("keyword", keyword);
 		}
+		List<Reply> replyList = boardService.replyList(boardNo);
+		model.addAttribute("replyList", replyList);
 		
 		return "views/boardDetail";
 	}

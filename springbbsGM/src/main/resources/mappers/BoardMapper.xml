@@ -89,4 +89,12 @@
 	WHERE board_no = #{boardNo}
 </delete>
 
+<!-- 댓글 조회 -->
+<select id="replyList" resultType="Reply">
+	SELECT *
+	FROM reply
+	WHERE board_no = #{boardNo}
+	ORDER BY reply_no DESC
+</select>
+
 </mapper>

@@ -44,4 +44,16 @@ public interface BoardMapper {
 			
 	// 게시글 번호에 해당하는 좋아요/싫어요 수를 읽어오기
 	public Board getRecommend(int boardNo);
+	
+	// 댓글 쓰기
+	public void addReply(Reply reply);
+	
+	// 댓글 수정
+	public void updateReply(Reply reply);
+	
+	// 댓글 삭제
+	public void deleteReply(int replyNo);
+	
+	// 댓글 전체 삭제
+	public void deleteAllReply(int boardNo);
 }

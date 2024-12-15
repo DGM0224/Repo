@@ -117,4 +117,28 @@
 	WHERE board_no = #{boardNo}
 </select>
 
+<!-- 댓글 쓰기 -->
+<insert id="addReply" parameterType="Reply">
+	INSERT INTO reply(board_no, reply_content, member_id, reply_reg_date)
+	VALUES(#{boardNo}, #{replyContent}, #{memberId}, SYSDATE())
+</insert>
+
+<!-- 댓글 수정 -->
+<update id="updateReply" parameterType="Reply">
+	UPDATE reply
+	SET reply_content = #{replyContent}, reply_reg_date = SYSDATE()
+	WHERE reply_no = #{replyNo}
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="deleteReply">
+	DELETE FROM reply
+	WHERE reply_no = #{replyNo}
+</delete>
+
+<!-- 댓글 전체 삭제 -->
+<delete id="deleteAllReply">
+	DELETE FROM reply
+	WHERE board_no = #{boardNo}
+</delete>
 </mapper>

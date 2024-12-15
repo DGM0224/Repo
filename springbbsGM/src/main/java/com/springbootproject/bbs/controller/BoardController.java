@@ -169,6 +169,7 @@ public class BoardController {
 		return null;
 	}
 
+	boardService.deleteAllReply(boardNo);
 	boardService.deleteBoard(boardNo);
 	
 	boolean searchOption = (type.equals("null") || keyword.equals("null")) ? false : true;

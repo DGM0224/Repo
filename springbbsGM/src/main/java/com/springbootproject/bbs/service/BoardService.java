@@ -127,4 +127,23 @@ public class BoardService {
 		return map;
 	}
 	
+	// 댓글 쓰기
+	public void addReply(Reply reply) {
+		boardMapper.addReply(reply);
+	}
+	
+	// 댓글 수정
+	public void updateReply(Reply reply) {
+		boardMapper.updateReply(reply);
+	}	
+	
+	// 댓글 삭제
+	public void deleteReply(int replyNo) {
+		boardMapper.deleteReply(replyNo);
+	}
+	
+	// 댓글 전체 삭제
+	public void deleteAllReply(int boardNo) {
+		boardMapper.deleteAllReply(boardNo);
+	}
 }

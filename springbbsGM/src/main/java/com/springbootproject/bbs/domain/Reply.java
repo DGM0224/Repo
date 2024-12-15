@@ -18,7 +18,5 @@ public class Reply {
 	private String replyContent;
 	private String memberId;
 	private Timestamp replyRegDate;
-	private int replyLike;
-	private int replyDislike;
 	
 }

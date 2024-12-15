@@ -111,8 +111,7 @@ layout:decorate="~{layouts/main_layout}">
 			<!-- 댓글이 존재하는 경우 -->
 			<div th:if="${not #lists.isEmpty(replyList)}" class="row mb-3">
 				<div class="col" id="replyList">
-					<div th:each="reply : ${replyList}"
-						class="replyRow row border border-top-0">
+					<div th:each="reply : ${replyList}" class="replyRow row border border-top-0">
 						<div class="col">
 							<div class="row bg-light p-2">
 								<div class="col-4">
@@ -120,12 +119,10 @@ layout:decorate="~{layouts/main_layout}">
 								</div>
 								<div class="col-8 text-end">
 									<span class="me-3"> [[${ #dates.format(reply.replyRegDate,'yyyy-MM-dd HH:mm:ss') }]] </span>
-									<button class="modifyReply btn btn-outline-success btn-sm"
-										th:data-no="${reply.replyNo}">
+									<button class="modifyReply btn btn-outline-success btn-sm" th:data-no="${reply.replyNo}">
 										<i class="bi bi-journal-text">수정</i>
 									</button>
-									<button class="deleteReply btn btn-outline-warning btn-sm"
-										th:data-no="${reply.replyNo}">
+									<button class="deleteReply btn btn-outline-warning btn-sm" th:data-no="${reply.replyNo}">
 										<i class="bi bi-trash">삭제</i>
 									</button>
 								</div>
